@@ -1,0 +1,185 @@
+BesselBasis_trainable: true
+PolynomialCutoff_p: 6
+_jit_bailout_depth: 2
+_jit_fusion_strategy:
+- !!python/tuple
+  - DYNAMIC
+  - 3
+allow_tf32: true
+append: false
+ase_args:
+  format: extxyz
+avg_num_neighbors: auto
+batch_size: 5
+chemical_symbols:
+- Sb
+- Mo
+- Te
+- Tb
+- Hg
+- Pm
+- Dy
+- P
+- Pd
+- Cd
+- Nd
+- Ga
+- Ho
+- Tc
+- Np
+- Ni
+- Mn
+- La
+- Os
+- O
+- Y
+- Co
+- Hf
+- Eu
+- Sc
+- B
+- Ce
+- Cl
+- Rb
+- Zr
+- Pu
+- Er
+- Pa
+- S
+- Ta
+- Sm
+- Ir
+- Ag
+- Lu
+- Pt
+- Cu
+- I
+- Bi
+- Al
+- C
+- Mg
+- K
+- Zn
+- In
+- Br
+- Ti
+- As
+- H
+- Fe
+- Pr
+- V
+- Pb
+- Tl
+- Th
+- Ge
+- Ca
+- W
+- Sr
+- Ru
+- Ba
+- Rh
+- Re
+- Nb
+- Tm
+- Gd
+- Sn
+- Se
+- Ac
+- Cs
+- F
+- Si
+- U
+- Be
+- Au
+- Li
+- Na
+- N
+- Cr
+dataloader_num_workers: 0
+dataset: ASEDataset
+dataset_file_name: ../data/data_train.extxyz
+dataset_seed: null
+dataset_statistics_stride: 1
+default_dtype: float32
+device: cuda
+early_stopping: null
+early_stopping_kwargs: null
+ema_decay: 0.999
+ema_use_num_updates: true
+end_of_batch_callbacks: []
+end_of_epoch_callbacks: []
+end_of_train_callbacks: []
+equivariance_test: false
+exclude_keys: []
+final_callbacks: []
+grad_anomaly_mode: false
+include_keys:
+- bader
+init_callbacks: []
+invariant_layers: 2
+invariant_neurons: 64
+l_max: 2
+learning_rate: 0.001
+log_batch_freq: 100
+log_epoch_freq: 1
+loss_coeffs:
+  bader:
+  - 1
+  - L1Loss
+  total_energy:
+  - 1
+  - PerAtomMSELoss
+lr_scheduler_kwargs: null
+lr_scheduler_name: none
+max_epochs: 1000
+max_gradient_norm: .inf
+metrics_components: null
+metrics_key: validation_loss
+model_builders:
+- SimpleIrrepsConfig
+- chargeModel
+- PerSpeciesRescale
+- RescaleEnergyEtc
+model_debug_mode: false
+model_dtype: float32
+n_train: 560
+n_train_per_epoch: null
+n_val: 69
+nonlinearity_gates:
+  e: silu
+  o: tanh
+nonlinearity_scalars:
+  e: silu
+  o: tanh
+nonlinearity_type: gate
+num_basis: 8
+num_features: 32
+num_layers: 4
+optimizer_kwargs: null
+optimizer_name: Adam
+parity: true
+r_max: 5.0
+report_init_validation: true
+resnet: false
+root: ../train_charge
+run_id: wZFP7z8TgAKwlZrIDm16YrRAyzrW-geNg5sLFq3VfK4
+run_name: charge_train
+save_checkpoint_freq: -1
+save_ema_checkpoint_freq: -1
+seed: 42
+shuffle: true
+start_of_epoch_callbacks: []
+train_idcs: null
+train_on_keys:
+- bader
+- total_energy
+train_val_split: random
+use_ema: false
+use_sc: true
+val_idcs: null
+validation_batch_size: 5
+validation_dataset: ase
+validation_dataset_file_name: ../data/data_val.extxyz
+verbose: INFO
+wandb: true
+wandb_project: bader charge

@@ -1,0 +1,191 @@
+_jit_bailout_depth: 2
+_jit_fusion_strategy:
+- !!python/tuple
+  - DYNAMIC
+  - 3
+append: false
+batch_size: 5
+model_dtype: float32
+allow_tf32: true    # consider setting to false if you plan to mix training/inference over any devices that are not NVIDIA Ampere or later
+
+chemical_symbols:
+- Cu
+- Pd
+- Na
+- Os
+- Ti
+- Zn
+- Pu
+- Te
+- Nd
+- Ni
+- Eu
+- Tl
+- Ga
+- W
+- Ce
+- Br
+- U
+- Sc
+- Mg
+- Y
+- Bi
+- Ba
+- Sr
+- Cd
+- O
+- Sn
+- Rh
+- Re
+- Pa
+- Er
+- Zr
+- Cr
+- Sb
+- Ho
+- Ge
+- Si
+- As
+- Tc
+- S
+- Tb
+- Dy
+- Cl
+- Lu
+- Sm
+- Co
+- Pr
+- Au
+- Th
+- Be
+- Mn
+- F
+- Pb
+- Ca
+- I
+- La
+- Hg
+- Ir
+- Al
+- Li
+- Tm
+- In
+- Hf
+- Nb
+- Fe
+- C
+- Gd
+- V
+- Ta
+- H
+- Se
+- Rb
+- Ag
+- Np
+- Pm
+- Ru
+- Pt
+- B
+- Ac
+- K
+- P
+- Cs
+- N
+- Mo
+dataloader_num_workers: 0
+dataset: ASEDataset
+dataset_file_name: ../data/data_train.extxyz
+dataset_seed: null
+dataset_statistics_stride: 1
+default_dtype: float32
+device: cuda
+early_stopping: null
+early_stopping_kwargs: null
+ema_decay: 0.999
+ema_use_num_updates: true
+end_of_batch_callbacks: []
+end_of_epoch_callbacks: []
+end_of_train_callbacks: []
+equivariance_test: false
+exclude_keys: []
+final_callbacks: []
+grad_anomaly_mode: false
+init_callbacks: []
+learning_rate: 0.001
+log_batch_freq: 100
+log_epoch_freq: 1
+loss_coeffs:                                                                        
+  bader: 
+    - 1
+    - L1Loss
+  total_energy:                                                                    
+    - 1
+    - PerAtomMSELoss
+lr_scheduler_kwargs: null
+lr_scheduler_name: none
+max_epochs: 1000
+max_gradient_norm: .inf
+metrics_components: null
+metrics_key: validation_loss
+model_builders:
+- SimpleIrrepsConfig
+- EnergyModel
+- PerSpeciesRescale
+- RescaleEnergyEtc
+model_debug_mode: false
+n_train: 560
+n_train_per_epoch: null
+n_val: 69
+optimizer_kwargs: null
+optimizer_name: Adam
+r_max: 5.0
+num_layers: 4
+l_max: 2
+parity: true                                                                      # whether to include features with odd mirror parityy; often turning parity off gives equally good results but faster networks, so do consider this
+num_features: 32
+nonlinearity_type: gate                                                           # may be 'gate' or 'norm', 'gate' is recommended
+resnet: false
+nonlinearity_scalars:
+  e: silu
+  o: tanh
+
+nonlinearity_gates:
+  e: silu
+  o: tanh
+
+# radial network basis
+num_basis: 8                                                                      # number of basis functions used in the radial basis, 8 usually works best
+BesselBasis_trainable: true                                                       # set true to train the bessel weights
+PolynomialCutoff_p: 6                                                             # p-exponent used in polynomial cutoff function, smaller p corresponds to stronger decay with distance
+
+# radial network
+invariant_layers: 2                                                               # number of radial layers, usually 1-3 works best, smaller is faster
+invariant_neurons: 64                                                             # number of hidden neurons in radial function, smaller is faster
+avg_num_neighbors: auto                                                           # number of neighbors to divide by, null => no normalization, auto computes it based on dataset 
+use_sc: true
+ase_args:                                                                        # any arguments needed by ase.io.read
+  format: extxyz
+include_keys:
+  - bader
+
+report_init_validation: true
+root: ../train_raw
+run_id: wZFP7z8TgAKwlZrIDm16YrRAyzrW-geNg5sLFq3VfK4
+run_name: raw_train
+save_checkpoint_freq: -1
+save_ema_checkpoint_freq: -1
+seed: 42
+shuffle: true
+start_of_epoch_callbacks: []
+train_idcs: null
+train_on_keys:
+- total_energy
+train_val_split: random
+use_ema: false
+val_idcs: null
+validation_batch_size: 5
+validation_dataset: ase
+validation_dataset_file_name: ../data/data_val.extxyz
+verbose: INFO
+wandb: true
+wandb_project: bader charge

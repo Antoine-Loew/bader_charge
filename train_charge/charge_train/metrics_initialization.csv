@@ -1,0 +1,2 @@
+epoch, wall, LR,validation_loss_bader,validation_loss_e,validation_loss,validation_bader_mae,validation_bader_rmse,validation_e_mae,validation_e_rmse
+         0,    2.952,    0.001,           7.4496,       0.00028253,           7.4498,          6.8,         7.92,         22.5,         33.9
